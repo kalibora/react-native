@@ -9,7 +9,7 @@ package com.facebook.react;
 
 import javax.annotation.Nullable;
 
-import android.app.Activity;
+import android.support.v4.app.ActivityCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -21,7 +21,7 @@ import com.facebook.react.modules.core.PermissionListener;
 /**
  * Base Activity for React Native applications.
  */
-public abstract class ReactActivity extends Activity
+public abstract class ReactActivity extends ActivityCompat
     implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
 
   private final ReactActivityDelegate mDelegate;
