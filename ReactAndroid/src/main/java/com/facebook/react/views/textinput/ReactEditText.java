@@ -12,6 +12,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableStringBuilder;
@@ -30,7 +31,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.uimanager.PixelUtil;
@@ -55,7 +55,7 @@ import javax.annotation.Nullable;
  * has called this explicitly. This is the default behavior on other platforms as well.
  * VisibleForTesting from {@link TextInputEventsTestCase}.
  */
-public class ReactEditText extends EditText {
+public class ReactEditText extends AppCompatEditText {
 
   private final InputMethodManager mInputMethodManager;
   // This flag is set to true when we set the text of the EditText explicitly. In that case, no
@@ -395,28 +395,27 @@ public class ReactEditText extends EditText {
    */
   private void manageSpans(SpannableStringBuilder spannableStringBuilder) {
     Object[] spans = getText().getSpans(0, length(), Object.class);
-    for (int spanIdx = 0; spanIdx < spans.length; spanIdx++) {
+    for (Object span : spans) {
       // Remove all styling spans we might have previously set
-      if (ForegroundColorSpan.class.isInstance(spans[spanIdx]) ||
-          BackgroundColorSpan.class.isInstance(spans[spanIdx]) ||
-          AbsoluteSizeSpan.class.isInstance(spans[spanIdx]) ||
-          CustomStyleSpan.class.isInstance(spans[spanIdx]) ||
-          ReactTagSpan.class.isInstance(spans[spanIdx])) {
-        getText().removeSpan(spans[spanIdx]);
+      if (ForegroundColorSpan.class.isInstance(span) ||
+        BackgroundColorSpan.class.isInstance(span) ||
+        AbsoluteSizeSpan.class.isInstance(span) ||
+        CustomStyleSpan.class.isInstance(span) ||
+        ReactTagSpan.class.isInstance(span)) {
+        getText().removeSpan(span);
       }
 
-      if ((getText().getSpanFlags(spans[spanIdx]) & Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) !=
-          Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) {
+      if ((getText().getSpanFlags(span) & Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) !=
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) {
         continue;
       }
-      Object span = spans[spanIdx];
-      final int spanStart = getText().getSpanStart(spans[spanIdx]);
-      final int spanEnd = getText().getSpanEnd(spans[spanIdx]);
-      final int spanFlags = getText().getSpanFlags(spans[spanIdx]);
+      final int spanStart = getText().getSpanStart(span);
+      final int spanEnd = getText().getSpanEnd(span);
+      final int spanFlags = getText().getSpanFlags(span);
 
       // Make sure the span is removed from existing text, otherwise the spans we set will be
       // ignored or it will cover text that has changed.
-      getText().removeSpan(spans[spanIdx]);
+      getText().removeSpan(span);
       if (sameTextForSpan(getText(), spannableStringBuilder, spanStart, spanEnd)) {
         spannableStringBuilder.setSpan(span, spanStart, spanEnd, spanFlags);
       }
