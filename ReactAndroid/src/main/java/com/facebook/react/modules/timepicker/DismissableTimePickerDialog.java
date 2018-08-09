@@ -8,11 +8,9 @@
 package com.facebook.react.modules.timepicker;
 
 import android.app.TimePickerDialog;
-import javax.annotation.Nullable;
-
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.Nullable;
 
 /**
  * <p>
