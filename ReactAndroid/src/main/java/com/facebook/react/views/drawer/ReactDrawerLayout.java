@@ -15,7 +15,6 @@ import android.view.View;
 
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.common.ReactConstants;
-import com.facebook.react.uimanager.PixelUtil;
 import com.facebook.react.uimanager.events.NativeGestureUtil;
 
 /**
