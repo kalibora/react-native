@@ -27,7 +27,7 @@ import com.facebook.react.views.picker.events.PickerItemSelectEvent;
 import javax.annotation.Nullable;
 
 /**
- * {@link ViewManager} for the {@link ReactPicker} view. This is abstract because the
+ * {@link SimpleViewManager} for the {@link ReactPicker} view. This is abstract because the
  * {@link Spinner} doesn't support setting the mode (dropdown/dialog) outside the constructor, so
  * that is delegated to the separate {@link ReactDropdownPickerManager} and
  * {@link ReactDialogPickerManager} components. These are merged back on the JS side into one
