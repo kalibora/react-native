@@ -10,18 +10,18 @@ package com.facebook.react.views.text;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.Layout;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import com.facebook.react.uimanager.ReactCompoundView;
 import com.facebook.react.uimanager.ViewDefaults;
 import com.facebook.react.views.view.ReactViewBackgroundManager;
 import javax.annotation.Nullable;
 
-public class ReactTextView extends TextView implements ReactCompoundView {
+public class ReactTextView extends AppCompatTextView implements ReactCompoundView {
 
   private static final ViewGroup.LayoutParams EMPTY_LAYOUT_PARAMS =
     new ViewGroup.LayoutParams(0, 0);
@@ -104,11 +104,11 @@ public class ReactTextView extends TextView implements ReactCompoundView {
 
       if (spans != null) {
         int targetSpanTextLength = text.length();
-        for (int i = 0; i < spans.length; i++) {
-          int spanStart = spannedText.getSpanStart(spans[i]);
-          int spanEnd = spannedText.getSpanEnd(spans[i]);
+        for (ReactTagSpan span : spans) {
+          int spanStart = spannedText.getSpanStart(span);
+          int spanEnd = spannedText.getSpanEnd(span);
           if (spanEnd > index && (spanEnd - spanStart) <= targetSpanTextLength) {
-            target = spans[i].getReactTag();
+            target = span.getReactTag();
             targetSpanTextLength = (spanEnd - spanStart);
           }
         }
