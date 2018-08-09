@@ -7,13 +7,12 @@
 
 package com.facebook.react.devsupport;
 
-import javax.annotation.Nullable;
-
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatDialog;
 import android.text.SpannedString;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
@@ -46,7 +45,7 @@ import org.json.JSONObject;
 /**
  * Dialog for displaying JS errors in an eye-catching form (red box).
  */
-/* package */ class RedBoxDialog extends Dialog implements AdapterView.OnItemClickListener {
+/* package */ class RedBoxDialog extends AppCompatDialog implements AdapterView.OnItemClickListener {
 
   private final DevSupportManager mDevSupportManager;
   private final DoubleTapReloadRecognizer mDoubleTapReloadRecognizer;
