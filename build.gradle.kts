@@ -8,13 +8,13 @@ buildscript {
         jcenter()
         mavenLocal()
         maven {
-            url 'https://maven.google.com/'
-            name 'Google'
+            url = uri("https://maven.google.com/")
+            name = "Google"
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'de.undercouch:gradle-download-task:3.4.3'
+        classpath("com.android.tools.build:gradle:2.3.3")
+        classpath("de.undercouch:gradle-download-task:3.4.3")
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -26,18 +26,18 @@ allprojects {
         jcenter()
         mavenLocal()
         maven {
-            url 'https://maven.google.com/'
-            name 'Google'
+            url = uri("https://maven.google.com/")
+            name = "Google"
         }
 
-        def androidSdk = System.getenv("ANDROID_SDK")
+        val androidSdk = System.getenv("ANDROID_SDK")
         maven {
-            url "$androidSdk/extras/m2repository/"
+            url = uri("$androidSdk/extras/m2repository/")
         }
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.4'
-    distributionUrl = distributionUrl.replace("bin", "all")
+tasks.create<Wrapper>("wrapper") {
+  gradleVersion = "4.4"
+  distributionUrl = distributionUrl.replace("bin", "all")
 }
