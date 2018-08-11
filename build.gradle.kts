@@ -38,6 +38,6 @@ allprojects {
 }
 
 tasks.create<Wrapper>("wrapper") {
-  gradleVersion = "4.4"
-  distributionUrl = distributionUrl.replace("bin", "all")
+  gradleVersion = "4.6"
+  distributionType = Wrapper.DistributionType.ALL
 }
